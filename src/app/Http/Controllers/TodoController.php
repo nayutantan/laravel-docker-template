@@ -14,11 +14,11 @@ class TodoController extends Controller
             // $todos = $todo->all();
             // @dd($todos);
             
-        return view('todo.index', ['todos' => $todos]);
+        return view('todo.index', ['test' => $todos]);
     }
     public function create()
     {
-    return view('todo.create');
+        return view('todo.create');
     }
     public function store(Request $request)
     {
@@ -28,6 +28,13 @@ class TodoController extends Controller
         $todo->fill($inputs);
         $todo->save();
 
-    return redirect()->route('todo.index');
+        return redirect()->route('todo.index');
+    }
+    public function show($id)
+    {
+        $model = new Todo();
+        $todo = $model->find($id);
+
+        return view('todo.show', ['todo' => $todo]);
     }
 }
